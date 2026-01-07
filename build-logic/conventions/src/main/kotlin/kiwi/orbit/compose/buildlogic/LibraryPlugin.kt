@@ -36,7 +36,7 @@ class LibraryPlugin : Plugin<Project> {
 
         extensions.getByType<KotlinTopLevelExtension>().apply {
             jvmToolchain {
-                languageVersion.set(JavaLanguageVersion.of(18))
+                languageVersion.set(JavaLanguageVersion.of(17))
                 vendor.set(JvmVendorSpec.AZUL)
             }
         }
