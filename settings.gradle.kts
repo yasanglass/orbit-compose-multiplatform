@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "OrbitCompose"
+rootProject.name = "orbit-compose-multiplatform"
 
 includeBuild("./build-logic")
 
