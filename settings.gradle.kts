@@ -36,7 +36,6 @@ dependencyResolutionManagement {
 include(":baselineprofile")
 include(":catalog")
 include(":catalog:semantics")
-include(":generator")
 include(":icons")
 include(":illustrations")
 include(":lint")
