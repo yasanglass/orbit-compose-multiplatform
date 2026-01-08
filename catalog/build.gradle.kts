@@ -167,5 +167,4 @@ dependencies {
     debugImplementation(libs.androidx.customViewPoolingContainer)
 
     lintChecks(libs.slack.composeLintChecks)
-    lintChecks(projects.lint)
 }
