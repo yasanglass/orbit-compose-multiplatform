@@ -33,7 +33,6 @@ dependencyResolutionManagement {
     }
 }
 
-include(":baselineprofile")
 include(":catalog")
 include(":catalog:semantics")
 include(":icons")
