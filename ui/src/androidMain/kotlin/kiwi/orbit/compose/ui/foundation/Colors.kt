@@ -346,6 +346,18 @@ public class Colors(
             surfaceContainer = surface.main,
             surfaceContainerLow = surface.main,
             surfaceContainerLowest = surface.main,
+            primaryFixed = primary.subtle,
+            primaryFixedDim = primary.normal,
+            onPrimaryFixed = contentColorFor(primary.subtle),
+            onPrimaryFixedVariant = contentColorFor(primary.normal),
+            secondaryFixed = info.subtle,
+            secondaryFixedDim = info.normal,
+            onSecondaryFixed = contentColorFor(info.subtle),
+            onSecondaryFixedVariant = contentColorFor(info.normal),
+            tertiaryFixed = info.subtle,
+            tertiaryFixedDim = info.normal,
+            onTertiaryFixed = contentColorFor(info.subtle),
+            onTertiaryFixedVariant = contentColorFor(info.normal),
         )
 }
 

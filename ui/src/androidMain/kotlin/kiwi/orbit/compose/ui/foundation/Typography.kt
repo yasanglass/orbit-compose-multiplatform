@@ -1,6 +1,7 @@
 package kiwi.orbit.compose.ui.foundation
 
 import androidx.compose.runtime.Immutable
+import kotlin.ConsistentCopyVisibility
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.PlatformTextStyle
@@ -13,6 +14,7 @@ import androidx.compose.ui.unit.sp
 // TODO: remove data class to allow maintain better binary compatibility
 @Suppress("WrapUnaryOperator")
 @Immutable
+@ConsistentCopyVisibility
 public data class Typography internal constructor(
     /**
      * Orbit Title1 text style.

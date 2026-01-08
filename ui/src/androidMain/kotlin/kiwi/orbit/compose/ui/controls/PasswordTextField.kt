@@ -79,7 +79,6 @@ public fun PasswordTextField(
         onTrailingIconClick = { showRawInput = !showRawInput },
         keyboardOptions = keyboardOptions.copy(
             capitalization = KeyboardCapitalization.None,
-            autoCorrect = false,
             keyboardType = KeyboardType.Password,
         ),
         keyboardActions = keyboardActions,

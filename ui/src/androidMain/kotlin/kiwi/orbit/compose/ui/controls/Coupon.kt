@@ -21,8 +21,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.platform.LocalClipboard
+import android.content.ClipData
+import androidx.compose.ui.platform.ClipEntry
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -49,7 +52,8 @@ public fun Coupon(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val uppercaseCode = remember(code) { code.uppercase() }
-    val clipboardManager = LocalClipboardManager.current
+    val clipboard = LocalClipboard.current
+    val scope = rememberCoroutineScope()
 
     Text(
         text = uppercaseCode,
@@ -67,7 +71,10 @@ public fun Coupon(
                 indication = LocalIndication.current,
                 enabled = onCopied != null,
                 onLongClick = {
-                    clipboardManager.setText(AnnotatedString(uppercaseCode))
+                    scope.launch {
+                        val clipData = ClipData.newPlainText("coupon", uppercaseCode)
+                        clipboard.setClipEntry(ClipEntry(clipData))
+                    }
                     onCopied?.invoke()
                 },
                 onClick = {}, // just long click copies

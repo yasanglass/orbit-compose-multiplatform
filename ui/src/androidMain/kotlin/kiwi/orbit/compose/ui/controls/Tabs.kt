@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.ZeroCornerSize
-import androidx.compose.material3.TabPosition
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,52 +27,64 @@ import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
 import kiwi.orbit.compose.ui.foundation.ProvideMergedTextStyle
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun TabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
-    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = { tabPositions ->
-        TabIndicator(
-            Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-        )
-    },
     divider: @Composable () -> Unit = { Separator() },
     tabs: @Composable () -> Unit,
 ) {
     OrbitElevations {
-        androidx.compose.material3.TabRow(
+        PrimaryTabRow(
             selectedTabIndex = selectedTabIndex,
             modifier = modifier,
             containerColor = OrbitTheme.colors.surface.main,
             contentColor = contentColorFor(OrbitTheme.colors.surface.main),
-            indicator = indicator,
+            indicator = {
+                TabRowDefaults.PrimaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = true),
+                    width = Dp.Unspecified,
+                    color = OrbitTheme.colors.primary.normal,
+                    shape = OrbitTheme.shapes.small.copy(
+                        bottomStart = ZeroCornerSize,
+                        bottomEnd = ZeroCornerSize,
+                    ),
+                )
+            },
             divider = divider,
             tabs = tabs,
         )
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun ScrollableTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
     edgePadding: Dp = ScrollableTabRowPadding,
-    indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = { tabPositions ->
-        TabIndicator(
-            Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-        )
-    },
     divider: @Composable () -> Unit = { Separator() },
     tabs: @Composable () -> Unit,
 ) {
     OrbitElevations {
-        androidx.compose.material3.ScrollableTabRow(
+        PrimaryScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
             modifier = modifier,
             containerColor = OrbitTheme.colors.surface.main,
             contentColor = contentColorFor(OrbitTheme.colors.surface.main),
             edgePadding = edgePadding,
-            indicator = indicator,
+            indicator = {
+                TabRowDefaults.PrimaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = true),
+                    width = Dp.Unspecified,
+                    color = OrbitTheme.colors.primary.normal,
+                    shape = OrbitTheme.shapes.small.copy(
+                        bottomStart = ZeroCornerSize,
+                        bottomEnd = ZeroCornerSize,
+                    ),
+                )
+            },
             divider = divider,
             tabs = tabs,
         )

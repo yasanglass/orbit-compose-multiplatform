@@ -7,12 +7,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -23,8 +24,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -205,20 +207,19 @@ internal fun TopAppBarLargePullRefreshScreen(
     onNavigateUp: () -> Unit,
 ) {
     var i by rememberSaveable { mutableIntStateOf(0) }
+    var isRefreshing by rememberSaveable { mutableStateOf(false) }
 
-    val pullRefreshState = rememberPullToRefreshState()
-    if (pullRefreshState.isRefreshing) {
-        LaunchedEffect(Unit) {
+    LaunchedEffect(isRefreshing) {
+        if (isRefreshing) {
             delay(1500)
             i += 1
-            pullRefreshState.endRefresh()
+            isRefreshing = false
         }
     }
     val scrollBehavior = TopAppBarScrollBehavior.exitUntilCollapsed()
 
     Scaffold(
         modifier = Modifier
-            .nestedScroll(pullRefreshState.nestedScrollConnection)
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBarLarge(
@@ -228,14 +229,12 @@ internal fun TopAppBarLargePullRefreshScreen(
                 largeElevated = true,
             )
         },
-        content = {
-            Box {
-                CustomContentPlaceholder(it, "Custom content $i")
-                PullToRefreshContainer(
-                    state = pullRefreshState,
-                    contentColor = OrbitTheme.colors.primary.normal,
-                    modifier = Modifier.align(Alignment.TopCenter),
-                )
+        content = { paddingValues ->
+            PullToRefreshBox(
+                isRefreshing = isRefreshing,
+                onRefresh = { isRefreshing = true },
+            ) {
+                CustomContentPlaceholder(paddingValues, "Custom content $i")
             }
         },
     )

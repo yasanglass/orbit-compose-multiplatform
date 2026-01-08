@@ -23,7 +23,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material3.ripple
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.RangeSliderState
 import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
@@ -197,7 +197,7 @@ private fun SliderContainer(
                 valueLabel()
             }
             CompositionLocalProvider(
-                LocalMinimumInteractiveComponentEnforcement provides false,
+                LocalMinimumInteractiveComponentSize provides 0.dp,
             ) {
                 slider()
             }
