@@ -8,7 +8,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ripple
 import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -102,7 +102,7 @@ public fun Surface(
                 )
                 .clickable(
                     interactionSource = interactionSource,
-                    indication = rememberRipple(),
+                    indication = ripple(),
                     enabled = enabled,
                     onClick = onClick,
                 ),
@@ -147,7 +147,7 @@ public fun Surface(
                 .selectable(
                     selected = selected,
                     interactionSource = interactionSource,
-                    indication = rememberRipple(),
+                    indication = ripple(),
                     enabled = enabled,
                     onClick = onClick,
                 ),
@@ -192,7 +192,7 @@ public fun Surface(
                 .toggleable(
                     value = checked,
                     interactionSource = interactionSource,
-                    indication = rememberRipple(),
+                    indication = ripple(),
                     enabled = enabled,
                     onValueChange = onCheckedChange,
                 ),
