@@ -12,8 +12,6 @@ java {
 dependencies {
     implementation(libs.agp)
     implementation(libs.kotlin.gradle)
-    implementation(libs.kotlin.dokka)
-    implementation(libs.kotlin.dokka.gradle)
     implementation(libs.vannitktech.mavenPublish.gradle)
 
     // workaround for https://github.com/gradle/gradle/issues/15383

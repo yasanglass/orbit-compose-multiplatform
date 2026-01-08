@@ -5,11 +5,9 @@ import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
     kotlin("android")
+    kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.application")
-    id("androidx.baselineprofile")
-    id("org.jmailen.kotlinter")
-    id("com.google.firebase.appdistribution")
     kotlin("plugin.parcelize")
 }
 
@@ -59,14 +57,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            firebaseAppDistribution {
-                appId = "1:442962334472:android:3a8ac71491745d2d37d2bd"
-                artifactType = "APK"
-                groups = "main"
-                // A different service account as the Orbit Compose project is not the linked project
-                // to Google Play.
-                serviceCredentialsFile = "release/orbit-service-account.json"
-            }
         }
         release {
             isPseudoLocalesEnabled = true
@@ -93,7 +83,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-        isCoreLibraryDesugaringEnabled = true
     }
 
     buildFeatures {
@@ -103,10 +92,6 @@ android {
         renderScript = false
         resValues = false
         shaders = false
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     experimentalProperties["android.experimental.r8.dex-startup-optimization"] = true
@@ -119,13 +104,12 @@ android {
         warningsAsErrors = true
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
-kotlinter {
-    reporters = arrayOf("json")
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+    }
 }
 
 dependencies {
@@ -158,13 +142,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.kiwi.navigationComposeTyped)
 
-    baselineProfile(projects.baselineprofile)
-
-    coreLibraryDesugaring(libs.android.desugarJdk)
-
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.customView)
     debugImplementation(libs.androidx.customViewPoolingContainer)
-
-    lintChecks(libs.slack.composeLintChecks)
 }

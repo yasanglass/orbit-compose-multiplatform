@@ -10,22 +10,21 @@ import org.gradle.api.Project
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
 import org.gradle.kotlin.dsl.the
-import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 class LibraryPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = with(project) {
         val libs = the<LibrariesForLibs>()
 
         pluginManager.apply("org.jetbrains.kotlin.multiplatform")
+        pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
         pluginManager.apply("com.android.library")
 
         configurations.all {
@@ -34,7 +33,7 @@ class LibraryPlugin : Plugin<Project> {
             }
         }
 
-        extensions.getByType<KotlinTopLevelExtension>().apply {
+        extensions.getByType<KotlinBaseExtension>().apply {
             jvmToolchain {
                 languageVersion.set(JavaLanguageVersion.of(17))
                 vendor.set(JvmVendorSpec.AZUL)
@@ -43,7 +42,17 @@ class LibraryPlugin : Plugin<Project> {
 
         extensions.configure<KotlinMultiplatformExtension> {
             explicitApi()
-            androidTarget {}
+            androidTarget {
+                compilations.all {
+                    compileTaskProvider.configure {
+                        compilerOptions {
+                            jvmTarget.set(JvmTarget.JVM_1_8)
+                            allWarningsAsErrors.set(true)
+                            freeCompilerArgs.add("-Xskip-prerelease-check")
+                        }
+                    }
+                }
+            }
             sourceSets {
                 val androidMain by getting {}
             }
@@ -67,10 +76,6 @@ class LibraryPlugin : Plugin<Project> {
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_1_8
                 targetCompatibility = JavaVersion.VERSION_1_8
-            }
-
-            composeOptions {
-                kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
             }
 
             lint {
@@ -97,19 +102,6 @@ class LibraryPlugin : Plugin<Project> {
             }
         }
 
-        tasks.withType<KotlinCompile>().configureEach {
-            kotlinOptions {
-                jvmTarget = "1.8"
-                allWarningsAsErrors = true
-                freeCompilerArgs = freeCompilerArgs.toMutableList().apply {
-                    add("-Xskip-prerelease-check")
-                }.toList()
-            }
-        }
-
-        dependencies {
-            add("lintChecks", libs.slack.composeLintChecks)
-        }
     }
 
     private fun KotlinMultiplatformExtension.sourceSets(configure: Action<NamedDomainObjectContainer<KotlinSourceSet>>): Unit =

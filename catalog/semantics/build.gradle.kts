@@ -1,7 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("android")
     id("com.android.library")
-    id("org.jmailen.kotlinter")
 }
 
 android {
@@ -22,11 +23,10 @@ android {
         warningsAsErrors = true
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
-kotlinter {
-    reporters = arrayOf("json")
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
+    }
 }
