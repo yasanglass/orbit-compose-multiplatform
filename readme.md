@@ -9,7 +9,7 @@
 [![Kiwi.com library](https://img.shields.io/badge/Kiwi.com-library-00A991)](https://code.kiwi.com)
 [![CI Build](https://img.shields.io/github/actions/workflow/status/kiwicom/orbit-compose/build.yml?branch=main)](https://github.com/kiwicom/orbit-compose/actions/workflows/build.yml)
 [![GitHub release](https://img.shields.io/github/v/release/kiwicom/orbit-compose)](https://github.com/kiwicom/orbit-compose/releases)
-[![Maven release](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fkiwi%2Forbit%2Fcompose%2Fui%2Fmaven-metadata.xml)](https://search.maven.org/search?q=g:kiwi.orbit.compose)
+[![Maven release](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fglass%2Fyasan%2Forbit%2Fui%2Fmaven-metadata.xml)](https://search.maven.org/search?q=g:glass.yasan.orbit)
 [![Compose 1.6](https://img.shields.io/badge/Compose-1.6-00A991)](https://developer.android.com/jetpack/androidx/releases/compose-kotlin)
 [![Compose M3 1.2](https://img.shields.io/badge/Compose%20M3-1.2-00A991)](https://developer.android.com/jetpack/androidx/releases/compose-material3)
 
@@ -36,13 +36,13 @@ Orbit Compose builds upon Material 3 library. If you need an integration with Ma
 
 ## Setup
 
-We publish our releases in [Maven Central](https://search.maven.org/search?q=g:kiwi.orbit.compose). To use
+We publish our releases in [Maven Central](https://search.maven.org/search?q=g:glass.yasan.orbit). To use
 this library, you can add the following dependencies to your **Gradle file**:
 
 ```
-implementation("kiwi.orbit.compose:ui:<version>")
-implementation("kiwi.orbit.compose:icons:<version>")
-implementation("kiwi.orbit.compose:illustrations:<version>")
+implementation("glass.yasan.orbit:ui:<version>")
+implementation("glass.yasan.orbit:icons:<version>")
+implementation("glass.yasan.orbit:illustrations:<version>")
 ```
 
 ## How to use?
@@ -108,7 +108,7 @@ Image(painter = Illustrations.AppKiwi, contentDescription = "app_kiwi")
 ## Documentation
 
 You can check out our component Catalog by downloading and installing
-our [showcase application](https://play.google.com/store/apps/details?id=kiwi.orbit.compose.catalog) from Google
+our [showcase application](https://play.google.com/store/apps/details?id=glass.yasan.orbit.catalog) from Google
 Play.
 
 The [API documentation](https://kiwicom.github.io/orbit-compose/) lists

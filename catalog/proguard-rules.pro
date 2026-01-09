@@ -20,13 +20,13 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class kiwi.orbit.compose.icons.Icons {
+-keep class glass.yasan.orbit.icons.Icons {
     public *;
 }
--keep class kiwi.orbit.compose.icons.ColoredIcons {
+-keep class glass.yasan.orbit.icons.ColoredIcons {
     public *;
 }
--keep class kiwi.orbit.compose.illustrations.Illustrations {
+-keep class glass.yasan.orbit.illustrations.Illustrations {
     public *;
 }
 

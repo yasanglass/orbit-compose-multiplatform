@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "kiwi.orbit.compose.buildlogic"
+group = "glass.yasan.orbit.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -21,12 +21,12 @@ dependencies {
 gradlePlugin {
     plugins {
         register("LibraryPlugin") {
-            id = "kiwi.orbit.compose.buildlogic.library"
-            implementationClass = "kiwi.orbit.compose.buildlogic.LibraryPlugin"
+            id = "glass.yasan.orbit.buildlogic.library"
+            implementationClass = "glass.yasan.orbit.buildlogic.LibraryPlugin"
         }
         register("PublishPlugin") {
-            id = "kiwi.orbit.compose.buildlogic.publish"
-            implementationClass = "kiwi.orbit.compose.buildlogic.PublishPlugin"
+            id = "glass.yasan.orbit.buildlogic.publish"
+            implementationClass = "glass.yasan.orbit.buildlogic.PublishPlugin"
         }
     }
 }

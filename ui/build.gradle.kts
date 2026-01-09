@@ -1,6 +1,6 @@
 plugins {
-    id("kiwi.orbit.compose.buildlogic.library")
-    id("kiwi.orbit.compose.buildlogic.publish")
+    id("glass.yasan.orbit.buildlogic.library")
+    id("glass.yasan.orbit.buildlogic.publish")
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.hot.reload)
 }
@@ -29,7 +29,7 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = "kiwi.orbit.compose.ui.generated"
+    packageOfResClass = "glass.yasan.orbit.ui.generated"
     generateResClass = always
 }
 

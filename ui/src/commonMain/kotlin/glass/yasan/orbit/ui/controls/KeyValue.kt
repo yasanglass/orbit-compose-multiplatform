@@ -1,0 +1,97 @@
+package glass.yasan.orbit.ui.controls
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import glass.yasan.orbit.ui.OrbitTheme
+import glass.yasan.orbit.ui.controls.internal.OrbitPreviews
+import glass.yasan.orbit.ui.controls.internal.Preview
+import glass.yasan.orbit.ui.foundation.ContentEmphasis
+import glass.yasan.orbit.ui.foundation.LocalContentEmphasis
+import glass.yasan.orbit.ui.foundation.LocalTextStyle
+
+@Composable
+public fun KeyValue(
+    key: @Composable () -> Unit,
+    value: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
+        CompositionLocalProvider(
+            LocalTextStyle provides OrbitTheme.typography.bodySmall,
+            LocalContentEmphasis provides ContentEmphasis.Minor,
+        ) {
+            key()
+        }
+        CompositionLocalProvider(
+            LocalTextStyle provides OrbitTheme.typography.bodyNormalMedium,
+            LocalContentEmphasis provides ContentEmphasis.Normal,
+        ) {
+            value()
+        }
+    }
+}
+
+@Composable
+public fun KeyValueLarge(
+    key: @Composable () -> Unit,
+    value: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
+        CompositionLocalProvider(
+            LocalTextStyle provides OrbitTheme.typography.bodyNormal,
+            LocalContentEmphasis provides ContentEmphasis.Minor,
+        ) {
+            key()
+        }
+        CompositionLocalProvider(
+            LocalTextStyle provides OrbitTheme.typography.bodyLargeMedium,
+            LocalContentEmphasis provides ContentEmphasis.Normal,
+        ) {
+            value()
+        }
+    }
+}
+
+@Composable
+public fun KeyValue(
+    key: String,
+    value: String,
+    modifier: Modifier = Modifier,
+) {
+    KeyValue(
+        key = { Text(text = key) },
+        value = { Text(text = value) },
+        modifier = modifier,
+    )
+}
+
+@Composable
+public fun KeyValueLarge(
+    key: String,
+    value: String,
+    modifier: Modifier = Modifier,
+) {
+    KeyValueLarge(
+        key = { Text(text = key) },
+        value = { Text(text = value) },
+        modifier = modifier,
+    )
+}
+
+@OrbitPreviews
+@Composable
+internal fun KeyValuePreview() {
+    Preview {
+        KeyValue(
+            key = "Key",
+            value = "Value",
+        )
+        KeyValueLarge(
+            key = "Large key",
+            value = "Large value",
+        )
+    }
+}

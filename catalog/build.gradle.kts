@@ -73,12 +73,12 @@ kotlin {
 }
 
 android {
-    namespace = "kiwi.orbit.compose.catalog"
+    namespace = "glass.yasan.orbit.catalog"
 
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "kiwi.orbit.compose.catalog"
+        applicationId = "glass.yasan.orbit.catalog"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionName = project.findProperty("VERSION_NAME").toString()
@@ -168,7 +168,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "kiwi.orbit.compose.catalog.MainKt"
+        mainClass = "glass.yasan.orbit.catalog.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
