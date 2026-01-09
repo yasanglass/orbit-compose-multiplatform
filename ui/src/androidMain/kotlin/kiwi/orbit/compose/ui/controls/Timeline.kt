@@ -129,7 +129,7 @@ public fun Timeline(
          * The gradient above the first item is already null as cannot be measured.
          * Drop the last line only.
          */
-        lines.removeLast()
+        lines.removeAt(lines.lastIndex)
         check(lines.size == gradients.size) {
             "Timeline container can render only TimelineItem composables."
         }

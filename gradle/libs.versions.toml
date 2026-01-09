@@ -5,6 +5,7 @@ targetSdk = "36"
 minSdk = "23"
 
 kotlin-lang = "2.2.21"
+compose-multiplatform = "1.9.3"
 
 kotlin-serialization = "1.9.0"
 androidx-activityCompose = "1.12.2"
@@ -41,5 +42,8 @@ compose-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util" }
 vannitktech-mavenPublish-gradle = "com.vanniktech:gradle-maven-publish-plugin:0.35.0"
+
+[plugins]
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 
 [bundles]

@@ -2,7 +2,9 @@ package kiwi.orbit.compose.icons
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.painterResource
+import kiwi.orbit.compose.icons.generated.Res
+import kiwi.orbit.compose.icons.generated.*
 
 /**
  * TopAppBarIcons are to be used as a navigation icon in TopAppBar and its variants.
@@ -11,9 +13,9 @@ import androidx.compose.ui.res.painterResource
 public object TopAppBarIcons {
     public val Back: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_top_app_bar_back)
+        get() = painterResource(Res.drawable.ic_top_app_bar_back)
 
     public val Close: Painter
         @Composable
-        get() = painterResource(R.drawable.ic_top_app_bar_close)
+        get() = painterResource(Res.drawable.ic_top_app_bar_close)
 }

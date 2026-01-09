@@ -14,6 +14,7 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
 import org.gradle.kotlin.dsl.the
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
@@ -42,6 +43,8 @@ class LibraryPlugin : Plugin<Project> {
 
         extensions.configure<KotlinMultiplatformExtension> {
             explicitApi()
+
+            // Android
             androidTarget {
                 compilations.all {
                     compileTaskProvider.configure {
@@ -53,9 +56,34 @@ class LibraryPlugin : Plugin<Project> {
                     }
                 }
             }
-            sourceSets {
-                val androidMain by getting {}
+
+            // iOS
+            iosX64()
+            iosArm64()
+            iosSimulatorArm64()
+
+            // Desktop
+            jvm("desktop") {
+                compilations.all {
+                    compileTaskProvider.configure {
+                        compilerOptions {
+                            jvmTarget.set(JvmTarget.JVM_1_8)
+                            allWarningsAsErrors.set(true)
+                        }
+                    }
+                }
             }
+
+            // Web
+            js {
+                browser()
+            }
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs {
+                browser()
+            }
+
+            applyDefaultHierarchyTemplate()
         }
 
         extensions.configure<LibraryExtension> {
@@ -83,6 +111,7 @@ class LibraryPlugin : Plugin<Project> {
                 disable.add("UnusedResources")
                 disable.add("VectorPath")
                 disable.add("UnusedAttribute")
+                disable.add("UnknownIssueId") // Some Compose lint checks may not be available in all configurations
                 disable.add("ComposeUnstableCollections") // not suitable requirement for library, for now
                 disable.add("ComposeCompositionLocalUsage") // theming uses this a lot
                 abortOnError = true

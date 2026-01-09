@@ -13,14 +13,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import coil3.request.error
-import kiwi.orbit.compose.icons.R
+import kiwi.orbit.compose.icons.generated.Res
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.internal.OrbitPreviews
 import kiwi.orbit.compose.ui.controls.internal.Preview
@@ -37,7 +34,8 @@ public fun CountryFlag(
     contentDescription: String?,
     modifier: Modifier = Modifier,
 ) {
-    val url = "file:///android_asset/country_flags/$countryCode.png"
+    val code = countryCode.lowercase().ifEmpty { "undefined" }
+    val url = Res.getUri("files/country_flags/orbit_country_flag_$code.png")
 
     // Default size -> 20.sp (~20.dp), bodyNormal's line-height.
     val lineHeight = with(LocalDensity.current) {
@@ -45,17 +43,12 @@ public fun CountryFlag(
     }
 
     Image(
-        painter = if (LocalInspectionMode.current) {
-            painterResource(DefaultFlagResource)
-        } else {
-            rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(url)
-                    .crossfade(true)
-                    .error(DefaultFlagResource)
-                    .build(),
-            )
-        },
+        painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(url)
+                .crossfade(true)
+                .build(),
+        ),
         contentScale = ContentScale.Fit,
         contentDescription = contentDescription,
         modifier = modifier
@@ -69,8 +62,6 @@ public fun CountryFlag(
             ),
     )
 }
-
-private val DefaultFlagResource = R.drawable.orbit_country_flag_undefined
 
 @OrbitPreviews
 @Composable
