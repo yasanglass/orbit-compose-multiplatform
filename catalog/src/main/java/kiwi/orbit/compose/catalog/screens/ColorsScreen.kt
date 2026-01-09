@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Surface
@@ -37,7 +36,6 @@ import kiwi.orbit.compose.ui.foundation.contentColorFor
 @Composable
 internal fun ColorsScreen(onNavigateUp: () -> Unit) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Colors") },

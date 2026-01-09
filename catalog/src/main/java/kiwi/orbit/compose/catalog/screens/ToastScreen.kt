@@ -18,8 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
-import kiwi.orbit.compose.catalog.semantics.ToastScreenSemantics
 import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -43,7 +41,6 @@ internal fun ToastScreen(
         },
     )
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Toast") },
@@ -114,7 +111,6 @@ private fun ToastScreenInner(
                     actionLabel = "Change",
                 )
             },
-            modifier = Modifier.testTag(ToastScreenSemantics.ToastAddToTripWithImageButtonTag),
             content = { Text("Toast – add to trip with image") },
         )
         Text(

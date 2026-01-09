@@ -38,7 +38,6 @@ dependencyResolutionManagement {
 }
 
 include(":catalog")
-include(":catalog:semantics")
 include(":icons")
 include(":illustrations")
 include(":ui")

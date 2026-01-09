@@ -118,7 +118,6 @@ dependencies {
     implementation(projects.ui)
     implementation(projects.icons)
     implementation(projects.illustrations)
-    implementation(projects.catalog.semantics)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appCompat)

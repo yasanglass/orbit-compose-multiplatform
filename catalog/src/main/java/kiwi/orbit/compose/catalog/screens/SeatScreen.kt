@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.SeatExtraLegroom
 import kiwi.orbit.compose.ui.controls.SeatLegendExtraLegroom
@@ -31,7 +30,6 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 @Composable
 internal fun SeatScreen(onNavigateUp: () -> Unit) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Seat") },

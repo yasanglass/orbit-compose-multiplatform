@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.Icon
@@ -46,7 +45,6 @@ internal fun TopAppBarLargeScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.testTag(TopAppBarScreenSemantics.LargeSimpleScreenTag),
         topBar = {
             TopAppBarLarge(
                 title = { Text("Simple") },

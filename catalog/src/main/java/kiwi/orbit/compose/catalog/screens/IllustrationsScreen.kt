@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.illustrations.IllustrationName
 import kiwi.orbit.compose.illustrations.painter
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -26,7 +25,6 @@ import kiwi.orbit.compose.ui.utils.plus
 @Composable
 internal fun IllustrationsScreen(onNavigateUp: () -> Unit) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Illustrations") },

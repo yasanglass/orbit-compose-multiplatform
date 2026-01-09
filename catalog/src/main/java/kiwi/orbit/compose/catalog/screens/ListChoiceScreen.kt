@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.BadgeCircleInfoSubtle
 import kiwi.orbit.compose.ui.controls.ButtonPrimarySubtle
@@ -37,7 +36,6 @@ internal fun ListChoiceScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("ListChoice") },

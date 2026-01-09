@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Separator
@@ -29,7 +28,6 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 @Composable
 internal fun SwitchScreen(onNavigateUp: () -> Unit) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Switch") },

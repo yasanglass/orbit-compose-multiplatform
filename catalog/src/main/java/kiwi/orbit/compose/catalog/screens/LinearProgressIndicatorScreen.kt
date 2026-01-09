@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.LinearIndeterminateProgressIndicator
 import kiwi.orbit.compose.ui.controls.LinearProgressIndicator
@@ -32,7 +31,6 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 @Composable
 internal fun LinearProgressIndicatorScreen(onNavigateUp: () -> Unit) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Linear Progress Indicator") },

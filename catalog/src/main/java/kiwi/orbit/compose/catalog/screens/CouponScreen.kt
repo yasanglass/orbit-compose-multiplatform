@@ -14,7 +14,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.ui.controls.Coupon
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -28,7 +27,6 @@ internal fun CouponScreen(
 ) {
     val toastHostState = rememberToastHostState()
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Coupon") },

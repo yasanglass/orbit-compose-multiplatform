@@ -18,8 +18,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
-import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.ui.OrbitTheme
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
@@ -113,7 +111,6 @@ internal fun TopAppBarScreenInner(
     onSelect: (Any) -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(title = { Text("TopAppBar") }, onNavigateUp = onNavigateUp)
         },
@@ -131,7 +128,6 @@ internal fun TopAppBarScreenInner(
             Text("Normal", style = OrbitTheme.typography.title3)
             ButtonSecondary(
                 onClick = { onSelect(TopAppBarDestination.Normal) },
-                modifier = Modifier.testTag(TopAppBarScreenSemantics.NormalSimpleButtonTag),
             ) {
                 Text("Simple")
             }
@@ -155,7 +151,6 @@ internal fun TopAppBarScreenInner(
             Text("Large", style = OrbitTheme.typography.title3)
             ButtonSecondary(
                 onClick = { onSelect(TopAppBarDestination.Large) },
-                modifier = Modifier.testTag(TopAppBarScreenSemantics.LargeSimpleButtonTag),
             ) {
                 Text("Simple")
             }

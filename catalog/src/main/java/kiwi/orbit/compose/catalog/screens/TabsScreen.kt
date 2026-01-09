@@ -9,7 +9,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Tab
 import kiwi.orbit.compose.ui.controls.TabRow
@@ -23,7 +22,6 @@ internal fun TabsScreen(onNavigateUp: () -> Unit) {
     val pagerState = rememberPagerState(0) { 3 }
     val scope = rememberCoroutineScope()
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Tabs") },

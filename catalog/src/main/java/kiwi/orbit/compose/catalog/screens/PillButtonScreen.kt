@@ -19,8 +19,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kiwi.orbit.compose.catalog.AppTheme
-import kiwi.orbit.compose.catalog.semantics.PillButtonScreenSemantics
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Icon
@@ -35,7 +33,6 @@ internal fun PillButtonScreen(
     onNavigateUp: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("PillButton") },
@@ -89,7 +86,6 @@ private fun PillButtonScreenInner(
                     show = true
                     showIcon = true
                 },
-                modifier = Modifier.testTag(PillButtonScreenSemantics.ShowWithIconButtonTag),
             ) { Text("Show with icon") }
         }
     }

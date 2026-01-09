@@ -19,8 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kiwi.orbit.compose.catalog.Destinations
-import kiwi.orbit.compose.catalog.semantics.DialogScreenSemantics
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.ui.controls.ButtonSecondary
 import kiwi.orbit.compose.ui.controls.Scaffold
 import kiwi.orbit.compose.ui.controls.Separator
@@ -44,7 +42,6 @@ internal fun DialogsScreen(
         ?.collectAsStateWithLifecycle() ?: remember { mutableStateOf(null) }
 
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Dialogs") },
@@ -86,23 +83,19 @@ private fun DialogsScreenInner(
     ) {
         ButtonSecondary(
             onClick = onShowOrbitDialog,
-            modifier = Modifier.testTag(DialogScreenSemantics.OrbitDialogButtonTag),
             content = { Text("Show Orbit Dialog") },
         )
         Separator(Modifier.padding(vertical = 16.dp))
         ButtonSecondary(
             onClick = onShowMaterialDialog,
-            modifier = Modifier.testTag(DialogScreenSemantics.M3DialogButtonTag),
             content = { Text("Show M3 Dialog") },
         )
         ButtonSecondary(
             onClick = onShowMaterialTimePicker,
-            modifier = Modifier.testTag(DialogScreenSemantics.M3TimePickerButtonTag),
             content = { Text("Show M3 TimePicker") },
         )
         ButtonSecondary(
             onClick = onShowMaterialDatePicker,
-            modifier = Modifier.testTag(DialogScreenSemantics.M3DatePickerButtonTag),
             content = { Text("Show M3 DatePicker") },
         )
         Text("Picked Time: $time")

@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.icons.ColoredIconName
 import kiwi.orbit.compose.icons.IconName
 import kiwi.orbit.compose.icons.painter
@@ -31,7 +30,6 @@ import kiwi.orbit.compose.ui.utils.plus
 @Composable
 internal fun IconsScreen(onNavigateUp: () -> Unit) {
     Scaffold(
-        modifier = Modifier.testTag(SubScreenSemantics.Tag),
         topBar = {
             TopAppBar(
                 title = { Text("Icons") },
