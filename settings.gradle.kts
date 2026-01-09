@@ -1,11 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "orbit-compose-multiplatform"
-
-includeBuild("./build-logic")
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     resolutionStrategy {
         eachPlugin {
@@ -25,6 +19,16 @@ pluginManagement {
         }
     }
 }
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
+}
+
+rootProject.name = "orbit-compose-multiplatform"
+
+includeBuild("./build-logic")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
     repositories {

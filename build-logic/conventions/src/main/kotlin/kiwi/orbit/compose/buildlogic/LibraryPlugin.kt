@@ -10,6 +10,7 @@ import org.gradle.api.Project
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.creating
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.getting
@@ -49,9 +50,10 @@ class LibraryPlugin : Plugin<Project> {
                 compilations.all {
                     compileTaskProvider.configure {
                         compilerOptions {
-                            jvmTarget.set(JvmTarget.JVM_1_8)
+                            jvmTarget.set(JvmTarget.JVM_11)
                             allWarningsAsErrors.set(true)
                             freeCompilerArgs.add("-Xskip-prerelease-check")
+                            freeCompilerArgs.add("-Xexpect-actual-classes")
                         }
                     }
                 }
@@ -67,8 +69,9 @@ class LibraryPlugin : Plugin<Project> {
                 compilations.all {
                     compileTaskProvider.configure {
                         compilerOptions {
-                            jvmTarget.set(JvmTarget.JVM_1_8)
+                            jvmTarget.set(JvmTarget.JVM_11)
                             allWarningsAsErrors.set(true)
+                            freeCompilerArgs.add("-Xexpect-actual-classes")
                         }
                     }
                 }
@@ -84,6 +87,18 @@ class LibraryPlugin : Plugin<Project> {
             }
 
             applyDefaultHierarchyTemplate()
+
+            // Custom source set for non-Android platforms
+            sourceSets {
+                val commonMain by getting
+                val nonAndroidMain by creating {
+                    dependsOn(commonMain)
+                }
+                val iosMain by getting { dependsOn(nonAndroidMain) }
+                val desktopMain by getting { dependsOn(nonAndroidMain) }
+                val jsMain by getting { dependsOn(nonAndroidMain) }
+                val wasmJsMain by getting { dependsOn(nonAndroidMain) }
+            }
         }
 
         extensions.configure<LibraryExtension> {
@@ -102,8 +117,8 @@ class LibraryPlugin : Plugin<Project> {
             }
 
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
+                sourceCompatibility = JavaVersion.VERSION_11
+                targetCompatibility = JavaVersion.VERSION_11
             }
 
             lint {
