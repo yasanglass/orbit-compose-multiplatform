@@ -1,13 +1,24 @@
 plugins {
     id("kiwi.orbit.compose.buildlogic.library")
     id("kiwi.orbit.compose.buildlogic.publish")
+    alias(libs.plugins.compose.multiplatform)
 }
 
-dependencies {
-    implementation(platform(libs.compose.bom))
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+        }
+        androidMain.dependencies {
+            implementation(libs.androidx.core)
+        }
+    }
+}
 
-    implementation(libs.kotlin.stdlib)
-    implementation(libs.androidx.core)
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.ui)
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "kiwi.orbit.compose.illustrations.generated"
+    generateResClass = always
 }
