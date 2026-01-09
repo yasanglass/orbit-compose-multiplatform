@@ -1,0 +1,31 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: monthly
+    timezone: "Europe/Prague"
+  labels:
+    - 'dependencies'
+  open-pull-requests-limit: 5
+  assignees:
+    - "yasanglass"
+  groups:
+    kotlin:
+      patterns:
+        - "jetbrains.kotlin.*"
+    android-x:
+      patterns:
+        - "androidx.*"
+
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: monthly
+    timezone: "Europe/Prague"
+  labels:
+    - 'github actions'
+    - 'dependencies'
+  open-pull-requests-limit: 5
+  assignees:
+    - "yasanglass"
