@@ -12,6 +12,7 @@ class PublishPlugin : Plugin<Project> {
         extensions.configure<MavenPublishBaseExtension> {
             publishToMavenCentral(
                 automaticRelease = true,
+                validateDeployment = false,
             )
             signAllPublications()
 
