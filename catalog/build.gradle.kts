@@ -1,14 +1,75 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
-    kotlin("android")
+    kotlin("multiplatform")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.application")
-    kotlin("plugin.parcelize")
+    alias(libs.plugins.compose.multiplatform)
+}
+
+kotlin {
+    androidTarget()
+
+    jvm("desktop")
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "catalog"
+            isStatic = true
+        }
+    }
+
+    js {
+        browser()
+        binaries.executable()
+    }
+
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(projects.ui)
+            implementation(projects.icons)
+            implementation(projects.illustrations)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
+
+            implementation(libs.compose.navigation.multiplatform)
+            implementation(libs.kotlin.datetime)
+            implementation(libs.kotlin.serialization.core)
+            implementation(libs.coil)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.androidx.core)
+            implementation(libs.androidx.appCompat)
+            implementation(libs.androidx.activityCompose)
+        }
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+            }
+        }
+    }
 }
 
 android {
@@ -81,8 +142,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {
@@ -103,44 +164,16 @@ android {
         abortOnError = true
         warningsAsErrors = true
     }
-
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+compose.desktop {
+    application {
+        mainClass = "kiwi.orbit.compose.catalog.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "Orbit Catalog"
+            packageVersion = "1.0.0"
+        }
     }
-}
-
-dependencies {
-    implementation(platform(libs.compose.bom))
-
-    implementation(projects.ui)
-    implementation(projects.icons)
-    implementation(projects.illustrations)
-
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.appCompat)
-    implementation(libs.androidx.activityCompose)
-    implementation(libs.androidx.activityComposeCatalog)
-
-    implementation(libs.compose.animation)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.layout)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.materialIconsExtended)
-    implementation(libs.compose.navigation)
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.runtimeLivedata)
-    implementation(libs.compose.toolingPreview)
-
-    implementation(libs.kotlin.datetime)
-    implementation(libs.kotlin.serialization.core)
-    implementation(libs.kotlin.stdlib)
-
-    implementation(libs.coil)
-
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.androidx.customView)
-    debugImplementation(libs.androidx.customViewPoolingContainer)
 }
