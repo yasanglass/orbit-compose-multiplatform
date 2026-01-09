@@ -24,11 +24,9 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
-import com.kiwi.navigationcompose.typed.composable
-import com.kiwi.navigationcompose.typed.createRoutePattern
-import com.kiwi.navigationcompose.typed.dialog
-import com.kiwi.navigationcompose.typed.navigate
 import kiwi.orbit.compose.catalog.screens.AlertScreen
 import kiwi.orbit.compose.catalog.screens.BadgeListScreen
 import kiwi.orbit.compose.catalog.screens.BadgeScreen
@@ -99,7 +97,7 @@ private fun NavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = createRoutePattern<Destinations.Main>(),
+        startDestination = Destinations.Main,
         modifier = Modifier.semantics { testTagsAsResourceId = true },
         enterTransition = { SharedXAxisEnterTransition(density) },
         exitTransition = { SharedXAxisExitTransition(density) },

@@ -1,12 +1,8 @@
 package kiwi.orbit.compose.catalog
 
-import com.kiwi.navigationcompose.typed.Destination
-import com.kiwi.navigationcompose.typed.ResultDestination
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalTime
 import kotlinx.serialization.Serializable
 
-sealed interface Destinations : Destination {
+sealed interface Destinations {
     @Serializable
     data object Main : Destinations
 
@@ -56,16 +52,10 @@ sealed interface Destinations : Destination {
     data object DialogMaterial : Destinations
 
     @Serializable
-    data object DialogMaterialTimePicker : Destinations, ResultDestination<DialogMaterialTimePicker.Result> {
-        @Serializable
-        data class Result(val time: LocalTime)
-    }
+    data object DialogMaterialTimePicker : Destinations
 
     @Serializable
-    data object DialogMaterialDatePicker : Destinations, ResultDestination<DialogMaterialDatePicker.Result> {
-        @Serializable
-        data class Result(val date: LocalDate)
-    }
+    data object DialogMaterialDatePicker : Destinations
 
     @Serializable
     data object DialogOrbit : Destinations
@@ -77,7 +67,7 @@ sealed interface Destinations : Destination {
     data object KeyValue : Destinations
 
     @Serializable
-    data object LinearProgressIndicator : Destination
+    data object LinearProgressIndicator : Destinations
 
     @Serializable
     data object List : Destinations

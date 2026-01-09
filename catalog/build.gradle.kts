@@ -140,7 +140,6 @@ dependencies {
     implementation(libs.kotlin.stdlib)
 
     implementation(libs.coil)
-    implementation(libs.kiwi.navigationComposeTyped)
 
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.androidx.customView)

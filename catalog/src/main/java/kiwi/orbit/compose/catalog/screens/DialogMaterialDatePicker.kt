@@ -10,14 +10,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.kiwi.navigationcompose.typed.setResult
-import kiwi.orbit.compose.catalog.Destinations
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.serialization.ExperimentalSerializationApi
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalSerializationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DialogMaterialDatePicker(navController: NavController) {
     val state = rememberDatePickerState()
@@ -30,7 +27,9 @@ internal fun DialogMaterialDatePicker(navController: NavController) {
                 val localDate = Instant.fromEpochMilliseconds(millis)
                     .toLocalDateTime(TimeZone.currentSystemDefault())
                     .date
-                navController.setResult(Destinations.DialogMaterialDatePicker.Result(localDate))
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.set("date_result", localDate)
             }
             navController.popBackStack()
         },

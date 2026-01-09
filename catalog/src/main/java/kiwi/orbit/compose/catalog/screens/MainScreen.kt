@@ -53,7 +53,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toOffset
-import com.kiwi.navigationcompose.typed.Destination
 import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.icons.Icons
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -81,11 +80,11 @@ private data class MenuItem(
 @ExperimentalSerializationApi
 @Composable
 internal fun MainScreen(
-    onNavigate: (Destination) -> Unit,
+    onNavigate: (Any) -> Unit,
     onThemeToggle: (Offset) -> Unit,
 ) {
-    fun MenuItem(title: String, icon: Any, testTag: String, onNavigate: () -> Destination): MenuItem =
-        MenuItem(title, icon, testTag, onClick = { onNavigate(onNavigate()) })
+    fun MenuItem(title: String, icon: Any, testTag: String, destination: () -> Destinations): MenuItem =
+        MenuItem(title, icon, testTag, onClick = { onNavigate(destination()) })
 
     val foundation = listOf(
         MenuItem("Colors", MIcons.Palette, Semantics.ColorsItemTag) { Destinations.Colors },

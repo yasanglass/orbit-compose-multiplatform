@@ -25,12 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
-import com.kiwi.navigationcompose.typed.setResult
-import kiwi.orbit.compose.catalog.Destinations
 import kotlinx.datetime.LocalTime
-import kotlinx.serialization.ExperimentalSerializationApi
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalSerializationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DialogMaterialTimePicker(navController: NavController) {
     val state = rememberTimePickerState()
@@ -38,11 +35,9 @@ internal fun DialogMaterialTimePicker(navController: NavController) {
     TimePickerDialog(
         onCancel = { navController.popBackStack() },
         onConfirm = {
-            navController.setResult(
-                Destinations.DialogMaterialTimePicker.Result(
-                    LocalTime(state.hour, state.minute),
-                ),
-            )
+            navController.previousBackStackEntry
+                ?.savedStateHandle
+                ?.set("time_result", LocalTime(state.hour, state.minute))
             navController.popBackStack()
         },
         toggle = {},

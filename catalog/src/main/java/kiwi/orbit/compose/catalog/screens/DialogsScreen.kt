@@ -12,15 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.kiwi.navigationcompose.typed.DialogResultEffect
-import com.kiwi.navigationcompose.typed.createRoutePattern
-import com.kiwi.navigationcompose.typed.navigate
 import kiwi.orbit.compose.catalog.Destinations
 import kiwi.orbit.compose.catalog.semantics.DialogScreenSemantics
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
@@ -31,27 +28,20 @@ import kiwi.orbit.compose.ui.controls.Text
 import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
-import kotlinx.serialization.ExperimentalSerializationApi
 
-@ExperimentalSerializationApi
 @Composable
 internal fun DialogsScreen(
     navController: NavController,
 ) {
-    var timeResult by remember { mutableStateOf<LocalTime?>(null) }
-    var dateResult by remember { mutableStateOf<LocalDate?>(null) }
-    DialogResultEffect(
-        currentRoutePattern = createRoutePattern<Destinations.Dialog>(),
-        navController = navController,
-    ) { result: Destinations.DialogMaterialTimePicker.Result ->
-        timeResult = result.time
-    }
-    DialogResultEffect(
-        currentRoutePattern = createRoutePattern<Destinations.Dialog>(),
-        navController = navController,
-    ) { result: Destinations.DialogMaterialDatePicker.Result ->
-        dateResult = result.date
-    }
+    val timeResult by navController.currentBackStackEntry
+        ?.savedStateHandle
+        ?.getStateFlow<LocalTime?>("time_result", null)
+        ?.collectAsStateWithLifecycle() ?: remember { mutableStateOf(null) }
+
+    val dateResult by navController.currentBackStackEntry
+        ?.savedStateHandle
+        ?.getStateFlow<LocalDate?>("date_result", null)
+        ?.collectAsStateWithLifecycle() ?: remember { mutableStateOf(null) }
 
     Scaffold(
         modifier = Modifier.testTag(SubScreenSemantics.Tag),

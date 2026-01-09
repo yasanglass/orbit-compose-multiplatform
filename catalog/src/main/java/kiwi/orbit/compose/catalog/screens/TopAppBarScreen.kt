@@ -16,11 +16,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.kiwi.navigationcompose.typed.Destination
-import com.kiwi.navigationcompose.typed.composable
-import com.kiwi.navigationcompose.typed.createRoutePattern
-import com.kiwi.navigationcompose.typed.navigate
-import com.kiwi.navigationcompose.typed.navigation
+import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import kiwi.orbit.compose.catalog.semantics.SubScreenSemantics
 import kiwi.orbit.compose.catalog.semantics.TopAppBarScreenSemantics
 import kiwi.orbit.compose.ui.OrbitTheme
@@ -31,7 +28,7 @@ import kiwi.orbit.compose.ui.controls.TopAppBar
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 
-sealed interface TopAppBarDestination : Destination {
+sealed interface TopAppBarDestination {
     @Serializable
     data object Home : TopAppBarDestination
 
@@ -67,11 +64,11 @@ sealed interface TopAppBarDestination : Destination {
 }
 
 @ExperimentalSerializationApi
-internal inline fun <reified T : Destination> NavGraphBuilder.topAppBarNavigation(
+internal inline fun <reified T : Any> NavGraphBuilder.topAppBarNavigation(
     navController: NavController,
 ) {
     navigation<T>(
-        startDestination = createRoutePattern<TopAppBarDestination.Home>(),
+        startDestination = TopAppBarDestination.Home,
     ) {
         composable<TopAppBarDestination.Home> {
             TopAppBarScreenInner(navController::navigateUp, navController::navigate)
@@ -113,7 +110,7 @@ internal inline fun <reified T : Destination> NavGraphBuilder.topAppBarNavigatio
 @Composable
 internal fun TopAppBarScreenInner(
     onNavigateUp: () -> Unit,
-    onSelect: (Destination) -> Unit,
+    onSelect: (Any) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.testTag(SubScreenSemantics.Tag),
