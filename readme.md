@@ -1,26 +1,21 @@
-<div align="center">
+<h1 align="center">Orbit Compose Multiplatform</h1>
 
-<a href="https://orbit.kiwi" target="_blank">  
-    <img alt="orbit-components" src="https://images.kiwi.com/common/orbit-logo-full.png" srcset="https://images.kiwi.com/common/orbit-logo-full@2x.png 2x" />  
-  </a>
+<p align="center">
+  <a href="https://central.sonatype.com/artifact/glass.yasan.orbit/ui"><img alt="version" src="https://img.shields.io/maven-central/v/glass.yasan.orbit/ui?label=version"/></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/yasanglass/orbit-compose-multiplatform.svg"/></a>
+  <a href="https://kotlinlang.org"><img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-2.2.21-purple.svg?style=flat"/></a>
+  <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/android.yml"><img alt="android" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/android.yml?label=android"/></a>
+  <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/desktop.yml"><img alt="desktop" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/desktop.yml?label=desktop"/></a>
+  <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/ios.yml"><img alt="ios" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/ios.yml?label=ios"/></a>
+  <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/js.yml"><img alt="js" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/js.yml?label=js"/></a>
+  <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/wasm.yml"><img alt="wasm" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/wasm.yml?label=wasm"/></a>
+  <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/publish.yml"><img alt="publish" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/publish.yml?label=publish"/></a>
+</p>
 
-**Orbit Compose**
-
-[![Kiwi.com library](https://img.shields.io/badge/Kiwi.com-library-00A991)](https://code.kiwi.com)
-[![CI Build](https://img.shields.io/github/actions/workflow/status/kiwicom/orbit-compose/build.yml?branch=main)](https://github.com/kiwicom/orbit-compose/actions/workflows/build.yml)
-[![GitHub release](https://img.shields.io/github/v/release/kiwicom/orbit-compose)](https://github.com/kiwicom/orbit-compose/releases)
-[![Maven release](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fglass%2Fyasan%2Forbit%2Fui%2Fmaven-metadata.xml)](https://search.maven.org/search?q=g:glass.yasan.orbit)
-[![Compose 1.6](https://img.shields.io/badge/Compose-1.6-00A991)](https://developer.android.com/jetpack/androidx/releases/compose-kotlin)
-[![Compose M3 1.2](https://img.shields.io/badge/Compose%20M3-1.2-00A991)](https://developer.android.com/jetpack/androidx/releases/compose-material3)
-
-</div>
-
-## ⚠️ This repository has been archived
-
-As of **7/5/2025**, this repository has been **archived** and is **no longer actively maintained**.
-
-The code remains available for use and reference, but **no new issues, pull requests, or updates will be accepted**.  
-If you are currently using this library, you may continue to do so, but please note that **no further development or bug fixes will be provided**.
+> [!CAUTION]
+> This is an **unofficial** [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/) port of Kiwi.com's now-archived [Orbit Compose](https://github.com/kiwicom/orbit-compose) library for Android.
+>
+> This fork is primarily for experimentation and preservation. While it should be stable, it is not extensively tested and is not meant for production use.
 
 ## About Orbit
 
@@ -28,11 +23,9 @@ If you are currently using this library, you may continue to do so, but please n
 Kiwi.com products as well as the processes behind building them. It elevates the user experience and increases
 the speed and efficiency of how we design and build products.
 
-This library allows developers to implement Orbit in a project
-using [Jetpack Compose](https://developer.android.com/jetpack/compose) for Android.
+This library allows developers to implement Orbit in [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/) projects targeting Android, iOS, JVM Desktop, JS, and WebAssembly.
 
-Orbit Compose builds upon Material 3 library. If you need an integration with Material 2, see
-[Theming chapter](https://github.com/kiwicom/orbit-compose/blob/main/docs/02-foundation/04-color/theming.md).
+Orbit Compose builds upon the Material 3 library.
 
 ## Setup
 
@@ -107,18 +100,5 @@ Image(painter = Illustrations.AppKiwi, contentDescription = "app_kiwi")
 
 ## Documentation
 
-You can check out our component Catalog by downloading and installing
-our [showcase application](https://play.google.com/store/apps/details?id=glass.yasan.orbit.catalog) from Google
-Play.
-
 The [API documentation](https://kiwicom.github.io/orbit-compose/) lists
 all possible types and composables in our library.
-
-## Contributing
-
-Read our [contributing guidelines](./contributing.md) to see how you can participate in this project.
-
-## Feedback
-
-Any feedback you have for us is appreciated. If you have any suggestions about what we can do, do not hesitate
-to [report the issue](https://github.com/kiwicom/orbit-compose/issues) and we'll take a look at it.
