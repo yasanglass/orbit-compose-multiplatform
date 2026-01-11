@@ -40,8 +40,11 @@ public object CountryFlags {
     public suspend fun bitmap(countryCode: String): ImageBitmap {
         val normalizedCode = countryCode.lowercase()
         return cache.getOrPut(normalizedCode) {
-            val bytes = Res.readBytes("files/country_flags/orbit_country_flag_$normalizedCode.png")
-            bytes.decodeToImageBitmap()
+            runCatching {
+                Res.readBytes("files/country_flags/$normalizedCode.png").decodeToImageBitmap()
+            }.getOrElse {
+                Res.readBytes(DefaultFlagPath).decodeToImageBitmap()
+            }
         }
     }
 
@@ -56,3 +59,5 @@ public object CountryFlags {
         return BitmapPainter(bitmap(countryCode))
     }
 }
+
+private const val DefaultFlagPath = "files/country_flags/orbit_country_flag_undefined.png"
