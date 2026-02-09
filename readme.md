@@ -15,7 +15,7 @@
 > [!CAUTION]
 > This is an **unofficial** [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/) port of Kiwi.com's now-archived [Orbit Compose](https://github.com/kiwicom/orbit-compose) library for Android.
 >
-> This fork is primarily for experimentation and preservation. While it should be stable, it is not extensively tested and is not meant for production use.
+> This fork is primarily for preservation. While it should be stable, it is not extensively tested and is not meant for production use.
 
 ## About Orbit
 
