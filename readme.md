@@ -10,6 +10,7 @@
   <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/js.yml"><img alt="js" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/js.yml?label=js"/></a>
   <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/wasm.yml"><img alt="wasm" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/wasm.yml?label=wasm"/></a>
   <a href="https://github.com/yasanglass/orbit-compose-multiplatform/actions/workflows/publish.yml"><img alt="publish" src="https://img.shields.io/github/actions/workflow/status/yasanglass/orbit-compose-multiplatform/publish.yml?label=publish"/></a>
+  <a href="https://context7.com/yasanglass/orbit-compose-multiplatform/llms.txt"><img alt="Context7" src="https://img.shields.io/badge/context7-llms.txt-blue"/></a>
 </p>
 
 > [!CAUTION]
