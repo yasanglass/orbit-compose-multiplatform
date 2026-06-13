@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration name="Run Catalog WasmJs" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration name="Run Catalog JS" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":catalog:webApp:wasmJsBrowserDevelopmentRun" />
+          <option value=":catalog:webApp:jsBrowserDevelopmentRun" />
         </list>
       </option>
       <option name="vmOptions" />

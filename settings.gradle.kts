@@ -37,7 +37,10 @@ dependencyResolutionManagement {
     }
 }
 
-include(":catalog")
+include(":catalog:shared")
+include(":catalog:androidApp")
+include(":catalog:desktopApp")
+include(":catalog:webApp")
 include(":icons")
 include(":illustrations")
 include(":ui")

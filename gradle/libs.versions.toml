@@ -4,8 +4,8 @@ compileSdk = "36"
 targetSdk = "36"
 minSdk = "23"
 
-kotlin-lang = "2.2.21"
-compose-multiplatform = "1.9.3"
+kotlin-lang = "2.4.0"
+compose-multiplatform = "1.11.1"
 
 kotlin-serialization = "1.9.0"
 androidx-activityCompose = "1.12.2"
@@ -13,11 +13,11 @@ androidx-core = "1.17.0"
 
 [libraries]
 
-kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.8.0" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-lang" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin-lang" }
 kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization" }
-agp = "com.android.tools.build:gradle:8.12.0"
+agp = "com.android.tools.build:gradle:9.2.0"
 androidx-appCompat = "androidx.appcompat:appcompat:1.7.1"
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -28,23 +28,26 @@ stately = { module = "co.touchlab:stately-concurrency", version = "2.1.0" }
 compose-animation = { module = "androidx.compose.animation:animation" }
 compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics", version = "1.10.0" }
 compose-bom = "androidx.compose:compose-bom:2025.12.01"
-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-multiplatform" }
 compose-layout = { module = "androidx.compose.foundation:foundation-layout" }
-compose-material3 = "androidx.compose.material3:material3:1.4.0"
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version = "1.11.0-alpha07" }
 compose-materialRipple = { module = "androidx.compose.material:material-ripple" }
-compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
+compose-materialIconsExtended = { module = "org.jetbrains.compose.material:material-icons-extended", version = "1.7.3" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.9.6" }
 compose-navigation-multiplatform = { module = "org.jetbrains.androidx.navigation:navigation-compose", version = "2.9.1" }
-compose-runtime = { module = "androidx.compose.runtime:runtime" }
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-multiplatform" }
 compose-runtimeLivedata = { module = "androidx.compose.runtime:runtime-livedata" }
 compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
-compose-toolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version = "1.10.0" }
-compose-ui = { module = "androidx.compose.ui:ui" }
+compose-toolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-multiplatform" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-multiplatform" }
 compose-uiUtil = { module = "androidx.compose.ui:ui-util", version = "1.10.0" }
+compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }
+compose-components-uiToolingPreview = { module = "org.jetbrains.compose.components:components-uiToolingPreview", version.ref = "compose-multiplatform" }
 vannitktech-mavenPublish-gradle = "com.vanniktech:gradle-maven-publish-plugin:0.35.0"
 
 [plugins]
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
-compose-hot-reload = { id = "org.jetbrains.compose.hot-reload", version = "1.0.0-beta06" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version = "9.2.0" }
+
 
 [bundles]

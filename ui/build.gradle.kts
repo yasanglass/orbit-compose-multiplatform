@@ -2,19 +2,18 @@ plugins {
     id("glass.yasan.orbit.buildlogic.library")
     id("glass.yasan.orbit.buildlogic.publish")
     alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.compose.hot.reload)
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.icons)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.toolingPreview)
             implementation(libs.coil)
             implementation(libs.stately)
         }
@@ -23,6 +22,10 @@ kotlin {
             implementation(libs.compose.animationGraphics)
             implementation(libs.compose.toolingPreview)
             implementation(libs.compose.uiUtil)
+            implementation(libs.compose.tooling)
+            implementation(libs.androidx.activityCompose)
+            implementation(libs.androidx.customView)
+            implementation(libs.androidx.customViewPoolingContainer)
         }
     }
 }
@@ -31,11 +34,4 @@ compose.resources {
     publicResClass = true
     packageOfResClass = "glass.yasan.orbit.ui.generated"
     generateResClass = always
-}
-
-dependencies {
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.androidx.activityCompose)
-    debugImplementation(libs.androidx.customView)
-    debugImplementation(libs.androidx.customViewPoolingContainer)
 }

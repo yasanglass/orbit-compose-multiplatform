@@ -1,6 +1,5 @@
 package glass.yasan.orbit.buildlogic
 
-import com.android.build.api.dsl.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Action
 import org.gradle.api.JavaVersion
@@ -27,7 +26,7 @@ class LibraryPlugin : Plugin<Project> {
 
         pluginManager.apply("org.jetbrains.kotlin.multiplatform")
         pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
-        pluginManager.apply("com.android.library")
+        pluginManager.apply("com.android.kotlin.multiplatform.library")
 
         configurations.all {
             resolutionStrategy {
@@ -46,7 +45,15 @@ class LibraryPlugin : Plugin<Project> {
             explicitApi()
 
             // Android
-            androidTarget {
+            configure<com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget> {
+                namespace = "glass.yasan.orbit.${project.name}"
+                compileSdk = libs.versions.compileSdk.get().toInt()
+                minSdk = libs.versions.minSdk.get().toInt()
+
+                androidResources {
+                    enable = true
+                }
+
                 compilations.all {
                     compileTaskProvider.configure {
                         compilerOptions {
@@ -60,7 +67,6 @@ class LibraryPlugin : Plugin<Project> {
             }
 
             // iOS
-            iosX64()
             iosArm64()
             iosSimulatorArm64()
 
@@ -100,54 +106,9 @@ class LibraryPlugin : Plugin<Project> {
                 val wasmJsMain by getting { dependsOn(nonAndroidMain) }
             }
         }
-
-        extensions.configure<LibraryExtension> {
-            namespace = "glass.yasan.orbit.${project.name}"
-
-            compileSdk = libs.versions.compileSdk.get().toInt()
-
-            defaultConfig {
-                minSdk = libs.versions.minSdk.get().toInt()
-                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-            }
-
-            buildFeatures {
-                compose = true
-                buildConfig = false
-            }
-
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_11
-                targetCompatibility = JavaVersion.VERSION_11
-            }
-
-            lint {
-                disable.add("ObsoleteLintCustomCheck")
-                disable.add("UnusedResources")
-                disable.add("VectorPath")
-                disable.add("UnusedAttribute")
-                disable.add("UnknownIssueId") // Some Compose lint checks may not be available in all configurations
-                disable.add("ComposeUnstableCollections") // not suitable requirement for library, for now
-                disable.add("ComposeCompositionLocalUsage") // theming uses this a lot
-                abortOnError = true
-                warningsAsErrors = true
-            }
-
-            packaging {
-                resources.excludes.add("META-INF/AL2.0")
-                resources.excludes.add("META-INF/LGPL2.1")
-            }
-
-            @Suppress("UnstableApiUsage")
-            testOptions {
-                unitTests {
-                    isIncludeAndroidResources = true
-                }
-            }
-        }
-
     }
 
     private fun KotlinMultiplatformExtension.sourceSets(configure: Action<NamedDomainObjectContainer<KotlinSourceSet>>): Unit =
         (this as org.gradle.api.plugins.ExtensionAware).extensions.configure("sourceSets", configure)
 }
+
