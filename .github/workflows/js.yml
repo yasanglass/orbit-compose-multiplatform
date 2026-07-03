@@ -26,12 +26,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: Assemble
-        run: ./gradlew jsJar
+        run: ./gradlew :catalog:webApp:jsBrowserDistribution
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v6
         with:
           name: artifacts
           path: |
-            **/build/libs/*-js.jar
+            catalog/webApp/build/dist/js/productionExecutable/
           retention-days: 30

@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":catalog:run" />
+          <option value=":catalog:desktopApp:run" />
         </list>
       </option>
       <option name="vmOptions" />

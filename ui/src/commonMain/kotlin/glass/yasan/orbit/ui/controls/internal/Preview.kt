@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import glass.yasan.orbit.ui.OrbitTheme
 import glass.yasan.orbit.ui.controls.Surface
 import glass.yasan.orbit.ui.foundation.lightColors
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 internal fun Preview(

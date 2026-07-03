@@ -27,7 +27,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: Build Debug Frameworks
-        run: ./gradlew linkDebugFrameworkIosSimulatorArm64
+        run: ./gradlew :catalog:linkDebugFrameworkIosSimulatorArm64
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v6

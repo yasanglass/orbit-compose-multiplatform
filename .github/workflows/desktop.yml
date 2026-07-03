@@ -27,12 +27,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: Assemble
-        run: ./gradlew desktopJar
+        run: ./gradlew :catalog:desktopApp:jar
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v6
         with:
           name: artifacts
           path: |
-            **/build/libs/*-desktop.jar
+            catalog/desktopApp/build/libs/*.jar
           retention-days: 30
