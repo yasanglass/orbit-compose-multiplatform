@@ -8,13 +8,13 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.icons)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(project(":icons"))
+            implementation(libs.compose.multiplatform.runtime)
+            implementation(libs.compose.multiplatform.foundation)
+            implementation(libs.compose.multiplatform.material3)
+            implementation(libs.compose.multiplatform.ui)
+            implementation(libs.compose.multiplatform.components.resources)
+            implementation(libs.compose.multiplatform.uiToolingPreview)
             implementation(libs.coil)
             implementation(libs.stately)
         }
@@ -34,8 +34,8 @@ compose.resources {
 }
 
 dependencies {
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.androidx.activityCompose)
-    debugImplementation(libs.androidx.customView)
-    debugImplementation(libs.androidx.customViewPoolingContainer)
+    "androidRuntimeClasspath"(libs.compose.tooling)
+    "androidRuntimeClasspath"(libs.androidx.activityCompose)
+    "androidRuntimeClasspath"(libs.androidx.customView)
+    "androidRuntimeClasspath"(libs.androidx.customViewPoolingContainer)
 }

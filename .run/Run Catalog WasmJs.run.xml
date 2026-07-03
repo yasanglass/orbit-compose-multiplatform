@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":catalog:wasmJsBrowserDevelopmentRun" />
+          <option value=":catalog:webApp:wasmJsBrowserDevelopmentRun" />
         </list>
       </option>
       <option name="vmOptions" />

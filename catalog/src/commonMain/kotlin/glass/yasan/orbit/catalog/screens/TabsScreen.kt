@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import glass.yasan.orbit.ui.controls.Scaffold
 import glass.yasan.orbit.ui.controls.Tab
 import glass.yasan.orbit.ui.controls.TabRow

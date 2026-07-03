@@ -27,14 +27,14 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: Assemble Debug
-        run: ./gradlew assembleDebug
+        run: ./gradlew :catalog:androidApp:assembleDebug :catalog:assemble :icons:assemble :illustrations:assemble :ui:assemble
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v6
         with:
           name: artifacts
           path: |
+            catalog/androidApp/build/outputs/apk/
             **/build/outputs/aar/
             **/build/libs/*-android.jar
           retention-days: 30
-

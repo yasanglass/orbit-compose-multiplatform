@@ -7,9 +7,9 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
+            implementation(libs.compose.multiplatform.runtime)
+            implementation(libs.compose.multiplatform.ui)
+            implementation(libs.compose.multiplatform.components.resources)
         }
         androidMain.dependencies {
             implementation(libs.androidx.core)

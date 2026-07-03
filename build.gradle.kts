@@ -1,11 +1,11 @@
 plugins {
-    kotlin("jvm") version "2.3.0" apply false
-    kotlin("android") version "2.3.0" apply false
-    kotlin("multiplatform") version "2.3.0" apply false
-    kotlin("plugin.serialization") version "2.3.0" apply false
-    kotlin("plugin.compose") version "2.3.0" apply false
-    id("org.jetbrains.compose") version "1.9.3" apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.plugin.serialization) apply false
+    alias(libs.plugins.kotlin.plugin.compose) apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
+    alias(libs.plugins.compose.multiplatform) apply false
     alias(libs.plugins.compose.hot.reload) apply false
-    id("com.android.library") version "8.13.2" apply false
-    id("com.vanniktech.maven.publish") version "0.35.0" apply false
+    alias(libs.plugins.vanniktech.maven.publish) apply false
 }

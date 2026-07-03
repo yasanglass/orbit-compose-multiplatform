@@ -27,12 +27,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       - name: Assemble
-        run: ./gradlew wasmJsJar
+        run: ./gradlew :catalog:webApp:wasmJsBrowserDistribution
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v6
         with:
           name: artifacts
           path: |
-            **/build/libs/*-wasm-js.jar
+            catalog/webApp/build/dist/wasmJs/productionExecutable/
           retention-days: 30
