@@ -40,7 +40,11 @@ compose.desktop {
         mainClass = "glass.yasan.orbit.catalog.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(
+                TargetFormat.Dmg, TargetFormat.Pkg,   // macOS
+                TargetFormat.Msi, TargetFormat.Exe,   // Windows
+                TargetFormat.Deb, TargetFormat.Rpm,   // Linux
+            )
             packageName = "Orbit Catalog"
             packageVersion = "1.0.0"
         }

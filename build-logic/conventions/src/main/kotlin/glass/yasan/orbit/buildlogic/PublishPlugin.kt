@@ -3,11 +3,26 @@ package glass.yasan.orbit.buildlogic
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.publish.PublishingExtension
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.Sign
 
 class PublishPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = with(project) {
         pluginManager.apply("com.vanniktech.maven.publish")
+
+        extensions.configure<PublishingExtension> {
+            repositories.maven {
+                name = "LocalMaven"
+                url = rootProject.layout.buildDirectory.dir("localMaven").get().asFile.toURI()
+            }
+        }
+
+        // Sign only when a key is configured (CI); local publishing skips signing.
+        tasks.withType<Sign>().configureEach {
+            isRequired = providers.gradleProperty("signingInMemoryKey").isPresent
+        }
 
         extensions.configure<MavenPublishBaseExtension> {
             publishToMavenCentral(

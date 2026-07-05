@@ -3,6 +3,9 @@ on:
   release:
     types: [released, prereleased]
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     name: Publish
@@ -28,6 +31,138 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+
+      - name: Upload Library Artifacts to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
+        run: |
+          ./gradlew publishAllPublicationsToLocalMavenRepository --no-configuration-cache
+          repo_dir="build/localMaven/glass/yasan/orbit"
+          for module in ui icons illustrations; do
+            [ -d "${repo_dir}/${module}" ] || { echo "::error::No published artifacts for ${module}"; exit 1; }
+            zip_name="orbit-${module}-${TAG}.zip"
+            (cd "${repo_dir}" && zip -r "${GITHUB_WORKSPACE}/${zip_name}" "${module}" "${module}"-*)
+            gh release upload "${TAG}" "${zip_name}" --clobber
+          done
+
+  sample-macos:
+    name: Sample App (macOS)
+    needs: publish
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Build macOS Targets
+        run: ./gradlew :catalog:desktopApp:packageDmg :catalog:desktopApp:packagePkg
+
+      - name: Upload to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          cp catalog/desktopApp/build/compose/binaries/main/dmg/*.dmg "orbit-catalog-macos-${TAG}.dmg"
+          gh release upload "${TAG}" "orbit-catalog-macos-${TAG}.dmg" --clobber
+
+          cp catalog/desktopApp/build/compose/binaries/main/pkg/*.pkg "orbit-catalog-macos-${TAG}.pkg"
+          gh release upload "${TAG}" "orbit-catalog-macos-${TAG}.pkg" --clobber
+
+  sample-windows:
+    name: Sample App (Windows)
+    needs: publish
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Build Windows Targets
+        shell: bash
+        run: ./gradlew :catalog:desktopApp:packageMsi :catalog:desktopApp:packageExe
+
+      - name: Upload to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+        shell: bash
+        run: |
+          cp catalog/desktopApp/build/compose/binaries/main/msi/*.msi "orbit-catalog-windows-${TAG}.msi"
+          gh release upload "${TAG}" "orbit-catalog-windows-${TAG}.msi" --clobber
+
+          cp catalog/desktopApp/build/compose/binaries/main/exe/*.exe "orbit-catalog-windows-${TAG}.exe"
+          gh release upload "${TAG}" "orbit-catalog-windows-${TAG}.exe" --clobber
+
+  sample-linux:
+    name: Sample App (Linux)
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Install RPM
+        run: sudo apt-get install -y rpm
+
+      - name: Build Linux + Android + Web
+        run: |
+          ./gradlew \
+            :catalog:desktopApp:packageDeb :catalog:desktopApp:packageRpm \
+            :catalog:androidApp:assembleDebug \
+            :catalog:webApp:wasmJsBrowserDistribution :catalog:webApp:jsBrowserDistribution
+
+      - name: Upload to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          cp catalog/desktopApp/build/compose/binaries/main/deb/*.deb "orbit-catalog-linux-${TAG}.deb"
+          gh release upload "${TAG}" "orbit-catalog-linux-${TAG}.deb" --clobber
+
+          cp catalog/desktopApp/build/compose/binaries/main/rpm/*.rpm "orbit-catalog-linux-${TAG}.rpm"
+          gh release upload "${TAG}" "orbit-catalog-linux-${TAG}.rpm" --clobber
+
+          cp catalog/androidApp/build/outputs/apk/debug/androidApp-debug.apk "orbit-catalog-android-${TAG}-debug.apk"
+          gh release upload "${TAG}" "orbit-catalog-android-${TAG}-debug.apk" --clobber
+
+          cd catalog/webApp/build/dist/wasmJs/productionExecutable
+          zip -r "${GITHUB_WORKSPACE}/orbit-catalog-wasm-${TAG}.zip" .
+          cd "${GITHUB_WORKSPACE}"
+          gh release upload "${TAG}" "orbit-catalog-wasm-${TAG}.zip" --clobber
+
+          cd catalog/webApp/build/dist/js/productionExecutable
+          zip -r "${GITHUB_WORKSPACE}/orbit-catalog-js-${TAG}.zip" .
+          cd "${GITHUB_WORKSPACE}"
+          gh release upload "${TAG}" "orbit-catalog-js-${TAG}.zip" --clobber
 
   refresh-docs:
     name: Refresh Context7 Docs
